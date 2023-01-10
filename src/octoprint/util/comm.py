@@ -246,7 +246,7 @@ def serialList():
 def baudrateList(candidates=None):
     if candidates is None:
         # sorted by likelihood
-        candidates = [115200, 250000, 230400, 57600, 38400, 19200, 9600]
+        candidates = [1000000, 115200, 250000, 230400, 57600, 38400, 19200, 9600]
 
     # additional baudrates prepended, sorted descending
     additionalBaudrates = settings().get(["serial", "additionalBaudrates"])
@@ -3793,7 +3793,8 @@ class MachineCom:
                     serial_obj.parity = serial.PARITY_NONE
 
                 serial_obj.open()
-
+                serial_obj.setDTR(False)
+                serial_obj.setRTS(False)
             except serial.SerialException:
                 self._logger.info(
                     f"Failed to connect: Port {p} is busy or does not exist"
