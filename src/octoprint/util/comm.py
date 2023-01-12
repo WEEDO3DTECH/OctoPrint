@@ -3793,6 +3793,7 @@ class MachineCom:
                     serial_obj.parity = serial.PARITY_NONE
 
                 serial_obj.open()
+                time.sleep(0.5)
                 serial_obj.setDTR(False)
                 serial_obj.setRTS(False)
             except serial.SerialException:
@@ -3855,6 +3856,7 @@ class MachineCom:
                 return False
 
             if serial_obj is not None:
+                time.sleep(2)
                 # first hook to succeed wins, but any can pass on to the next
                 self._serial = serial_obj
                 self._clear_to_send.reset()
